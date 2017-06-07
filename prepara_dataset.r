@@ -3,10 +3,10 @@
 # nascimento            Date        Data de nascimento do paciente                                                                                                                                                                                                               
 # data.intervencao      Date        Data da intervenção
 # data.final            Date        ?????
-# falha                 factor      ?????
+# falha                 factor      Se havia falha na restauração ou não (Semelhante ao status, mas binário)
 # idade                 number      Idade do paciente na intervenção                                                                                                                                                                                       
 # tipo.invervencao      factor      Tipo de intervenção
-# vitality              factor      ???????                                                                                                                                          
+# vitalidade            factor      Vitalidade. Yes: Não tem canal; No: há canal no dente.                                                                                                                                       
 # novo.restauracao      factor      Se é novo ou reparação                                                                                                                                                
 # motivo                factor      Motivo para intervenção
 # numero.dente          number      Número do dente
@@ -15,22 +15,19 @@
 # lado                  factor      Lado direito ou esquerdo
 # tipo.restauracao      factor      Tipo de restauração direta ou indireta
 # material.restauracao  factor      Material usado na restauração
-# [30] "restoration.Class"                                                                                                                                                                                                                   
-# [31] "restoration.Class.1"                                                                                                                                                                                                                 
-# [32] "restored.surfaces"                                                                                                                                                                                                                    
-# [34] "number.of.surfaces..calcula.sozinho."                                                                                                                                                                                                
-# [35] "status..1.alive..2.repaired.and.alive..3.repaired.and.faile.4..failed.never.repaired."                                                                                                                                               
-# [36] "censored...apenas.restaura.äes.nÆo.falhadas.com.status.1.e.2..data.ultimo.dia.que.o.paciente.foi.no.Paullo."                                                                                                                         
-# [37] "failure.date.1..data.quando.houve.a.substitui.Æo.da.restaura.Æo."                                                                                                                                                                    
-# [38] "failure.date.2..se.o.reparo.for.considerado.como.falha.da.restaura.Æo..data.1..reparo."                                                                                                                                              
-# [39] "status..1.alive..2.repaired.and.alive..3.repaired.and.faile.4..failed.never.repaired..1"                                                                                                                                             
-# [40] "tempo.censored...alive.e.4"                                                                                                                                                                                                          
-# [41] "tempo.falha...reparo.SUCESSO"                                                                                                                                                                                                        
-# [42] "tempo.falha...reparo.FALHA"                                                                                                                                                                                                          
-# [44] "Restoration.Price"                                                                                                                                                                                                                   
-# [46] "Adhesive"                                                                                                                                                                                                                            
-# [47] "Adhesive.1"                                                                                                                                                                                                                          
-# [48] "filling.material.category"    
+# classe                factor      Classe da cavidade da restauração
+# superficies.restaurad factor      Quais superfícies foram restauradas (L = Lingual, P = Palatina, V = Vestibular, O = Oclusal, I = Incisal, M = Mesial, D = Distal)
+# superficies.res.count number      Número de superfícies restauradas
+# status                factor      Status da restauração na revisão
+# censored              date        Data da revisão caso o status seja 1 ou 2 (Sucesso)
+# data.falha.1          date        ?????
+# data.falha.2          date        ?????
+# tempo.censored        number      Anos entre a data "censored" e a data da intervenção
+# tempo.falha.sucesso   number      Anos entre a data "censored" e a data da intervenção
+# tempo.falha.falha     number      Anos entre a data "data.falha.1" e a "data.final"
+# preco                 number      Valor da revisão
+# adesivo               factor      Tipo do adesivo utilizado na restauracao
+# material.preenchimento
 # superficie.lingual.palatal    logical     Se houve restauração na superfície lingual/palatal
 # superficie.vestibular         logical     Se houve restauração na superfície vestibular
 # superficie.oclusal.incisal    logical     Se houve restauração na superfície oclusal/incisal
@@ -59,8 +56,8 @@
 #     - Oclusal = Incisal?
 
 # Carrega os dados iniciais
-data = read.csv2("dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
-#data = read.csv2("dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
+#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
+data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
 # Pega as 3006 primeiras linhas, pois as outras linhas seriam em branco
 data <- data[c(0:3006), ]
 
@@ -105,9 +102,9 @@ names(data)[names(data) == "restoration.material..resin.composite.RC..ceramic.C.
 names(data)[names(data) == "restored.surfaces"] = "superficies.restauradas"
 names(data)[names(data) == "number.of.surfaces..calcula.sozinho."] = "superficies.restauradas.count"
 names(data)[names(data) == "status..1.alive..2.repaired.and.alive..3.repaired.and.faile.4..failed.never.repaired."] = "status"
-names(data)[names(data) == "failure.date.1..data.quando.houve.a.substitui.Æo.da.restaura.Æo."] = "data.falha.1"
-names(data)[names(data) == "failure.date.2..se.o.reparo.for.considerado.como.falha.da.restaura.Æo..data.1..reparo."] = "data.falha.2"
-names(data)[names(data) == "censored...apenas.restaura.äes.nÆo.falhadas.com.status.1.e.2..data.ultimo.dia.que.o.paciente.foi.no.Paullo."] = "censored"
+names(data)[22] = "data.falha.1"
+names(data)[23] = "data.falha.2"
+names(data)[21] = "censored"
 names(data)[names(data) == "tempo.censored...alive.e.4"] = "tempo.censored"
 names(data)[names(data) == "tempo.falha...reparo.SUCESSO"] = "tempo.falha.sucesso"
 names(data)[names(data) == "tempo.falha...reparo.FALHA"] = "tempo.falha.falha"
@@ -115,8 +112,6 @@ names(data)[names(data) == "Restoration.Price"] = "preco"
 names(data)[names(data) == "Adhesive"] = "adesivo"
 names(data)[names(data) == "filling.material.category"] = "material.preenchimento"
 names(data)[names(data) == "restoration.Class"] = "classe"
-
-names(data)
 
 # Ajustes de colunas
 data$sexo = as.character(data$sexo)
@@ -217,7 +212,73 @@ data$superficie.distal = regexpr('D', data$superficies.restauradas) >= 0
 
 data$superficies.restauradas.count = nchar(as.character(data$superficies.restauradas))
 
-summary(data)
-head(data)
+data$classe = as.character(data$classe)
+data$classe[data$classe == "99"] = NA
+data$classe[data$classe == "FACETA"] = "Faceta"
+data$classe[grepl("RECONSTITUI.*O COM PINO", data$classe)] = "Reconstituição com pino"
+data$classe[grepl("RECONSTITUI.*O", data$classe)] = "Reconstituição"
+data$classe[data$classe == "VENEER"] = "Veneer"
+data$classe[data$classe == "COROA"] = "Coroa"
+data$classe[data$classe == "COROA PURA"] = "Coroa pura"
+data$classe[data$classe == "ONLAY"] = "Onlay"
+data$classe[data$classe == "OVERLAY"] = "Overlay"
+data$classe[data$classe == "VENEER+RIBBOND"] = "Veneer+Ribbond"
+data$classe[data$classe == "COROA SOBRE IMPLANTE"] = "Coroa sobre implante"
+data$classe[data$classe == "III+VENEER"] = "III+Veneer"
+data$classe[data$classe == "AUMENTO INCISAL"] = "Aumento incisal"
+data$classe = as.factor(data$classe)
 
-write.csv2(data, file = "dataset.csv", fileEncoding = "utf-8")
+data$status = as.character(data$status)
+data$status[data$status == "0"] = NA
+data$status[data$status == "1"] = "OK"
+data$status[data$status == "2"] = "Reparado e OK"
+data$status[data$status == "3"] = "Reparado e falha"
+data$status[data$status == "4"] = "Falha (Nunca reparado)"
+data$status = as.factor(data$status)
+
+data$censored = as.Date(data$censored, "%d/%m/%Y")
+
+data$data.falha.1 = as.Date(data$data.falha.1, "%d/%m/%Y")
+
+data$data.falha.2 = as.Date(data$data.falha.2, "%d/%m/%Y")
+
+data$adesivo = as.character(data$adesivo)
+data$adesivo[data$adesivo == "99"] = NA
+data$adesivo[data$adesivo == ""] = NA
+data$adesivo[data$adesivo == "OPTBOND"] = "OPTIBOND"
+data$adesivo[data$adesivo == "OB"] = "OPTIBOND"
+data$adesivo[data$adesivo == "OPT"] = "OPTIBOND"
+data$adesivo[data$adesivo == "ALL BOND2"] = "ALLBONDII"
+data$adesivo[data$adesivo == "CF"] = "CLEARFIL"
+data$adesivo[data$adesivo == "CLEARFILL"] = "CLEARFIL"
+data$adesivo[data$adesivo == "AC"] = "AUTOCOND 3M"
+data$adesivo = as.factor(data$adesivo)
+
+data$material.preenchimento = as.character(data$material.preenchimento)
+data$material.preenchimento[data$material.preenchimento == "99"] = NA
+data$material.preenchimento = as.factor(data$material.preenchimento)
+
+# Cria atributos numéricos para todos os atributos do tipo factor
+data$falha.n = as.numeric(data$falha)
+data$sexo.n = as.numeric(data$sexo)
+data$tipo.invervencao.n = as.numeric(data$tipo.invervencao)
+data$novo.restauracao.n = as.numeric(data$novo.restauracao)
+data$motivo.n = as.numeric(data$motivo)
+data$numero.dente.n = as.numeric(data$numero.dente)
+data$tipo.dente.n = as.numeric(data$tipo.dente)
+data$arcada.n = as.numeric(data$arcada)
+data$lado.n = as.numeric(data$lado)
+data$tipo.restauracao.n = as.numeric(data$tipo.restauracao)
+data$material.restauracao.n = as.numeric(data$material.restauracao)
+data$status.n = as.numeric(data$status)
+data$superficie.lingual.palatal.n = as.numeric(data$superficie.lingual.palatal)
+data$superficie.vestibular.n = as.numeric(data$superficie.vestibular)
+data$superficie.oclusal.incisal.n = as.numeric(data$superficie.oclusal.incisal)
+data$superficie.oclusal.incisal.n = as.numeric(data$superficie.oclusal.incisal)
+data$superficie.mesial.n = as.numeric(data$superficie.mesial)
+data$superficie.distal.n = as.numeric(data$superficie.distal)
+data$classe.n = as.numeric(data$classe)
+data$superficies.restauradas.n = as.numeric(data$superficies.restauradas)
+data$status.n = as.numeric(data$status)
+data$adesivo.n = as.numeric(data$adesivo)
+data$material.preenchimento.n = as.numeric(data$material.preenchimento)

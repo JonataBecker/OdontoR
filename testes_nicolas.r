@@ -1,63 +1,79 @@
 library(class)
 source("prepara_dataset.r")
 
-names(data)
+# Função para testar um modelo KNN
+test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na) {
+  # Cria o array de colunas (A classe tem que ser a primeira)
+  columns = c(classe, atributos)
+  columns = match(columns, names(data))
+  columns = columns[!is.na(columns)]
+  columns = as.numeric(columns)
+  # Monta o array que será processado
+  processed = data[, columns]
+  # Somente casos completos
+  processed = processed[complete.cases(processed),]
 
-getmode <- function(v) {
-  uniqv <- unique(v)
-  uniqv[which.max(tabulate(match(v, uniqv)))]
+  total = nrow(processed)
+  registros_processados = total
+  treinamento = total * pct_treinamento
+  teste = total - treinamento
+  
+  testedf <- processed[treinamento:total,2:ncol(processed)]
+  
+  # Criando um data frame de treinamento
+  treinamentodf <- processed[1:treinamento,2:ncol(processed)]
+  
+  # Criando um data frame com os rótulos do atributo classificador
+  rotulos <- processed[1:treinamento, 1]
+  
+  # Classe estimada do exemplar de teste
+  classe_estimada <- knn(treinamentodf, testedf, rotulos, k)
+  
+  compare = data.frame(processed[treinamento:total,][classe], classe_estimada)
+  names(compare)[1] = "real"
+  corrects = length(compare$classe_estimada[compare$real == compare$classe_estimada])
+  
+  pct_acerto = corrects / (total - treinamento)
+  
+  data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, registros_processados, treinamento, teste, pct_acerto)
 }
 
-data$falha.n = as.numeric(data$falha)
-data$sexo.n = as.numeric(data$sexo)
-data$tipo.invervencao.n = as.numeric(data$tipo.invervencao)
-data$novo.restauracao.n = as.numeric(data$novo.restauracao)
-data$motivo.n = as.numeric(data$motivo)
-data$numero.dente.n = as.numeric(data$numero.dente)
-data$tipo.dente.n = as.numeric(data$tipo.dente)
-data$arcada.n = as.numeric(data$arcada)
-data$lado.n = as.numeric(data$lado)
-data$tipo.restauracao.n = as.numeric(data$tipo.restauracao)
-data$material.restauracao.n = as.numeric(data$material.restauracao)
-data$status.n = as.numeric(data$status)
-data$superficie.lingual.palatal.n = as.numeric(data$superficie.lingual.palatal)
-data$superficie.vestibular.n = as.numeric(data$superficie.vestibular)
-data$superficie.oclusal.incisal.n = as.numeric(data$superficie.oclusal.incisal)
-data$superficie.oclusal.incisal.n = as.numeric(data$superficie.oclusal.incisal)
-data$superficie.mesial.n = as.numeric(data$superficie.mesial)
-data$superficie.distal.n = as.numeric(data$superficie.distal)
+all_results = data.frame()
 
-
-plot(data$falha)
-
-columns = c("falha", "sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "status.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
-columns = match(columns, names(data))
-columns = columns[!is.na(columns)]
-columns = as.numeric(columns)
-
-processed = data[, columns]
-
-#sapply(processed, getmode)
-processed = processed[complete.cases(processed),]
-
-summary(processed$idade)
+k = 5
+pct_treinamento = 0.8
+atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "status.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+classe = "falha"
+metodo_na = "complete.cases"
+all_results = rbind(all_results, test_knn("K pequeno", k, pct_treinamento, atributos, classe, metodo_na))
 
 k = 50
-t = nrow(processed)
-n = t * 0.8
+pct_treinamento = 0.8
+atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "status.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+classe = "falha"
+metodo_na = "complete.cases"
+all_results = rbind(all_results, test_knn("K grande", k, pct_treinamento, atributos, classe, metodo_na))
 
-teste <- processed[n:t,2:ncol(processed)]
+k = 50
+pct_treinamento = 0.8
+atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "status.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+classe = "status"
+metodo_na = "complete.cases"
+all_results = rbind(all_results, test_knn("Classe status", k, pct_treinamento, atributos, classe, metodo_na))
 
-# Criando um data frame de treinamento
-treinamento <- processed[1:n,2:ncol(processed)]
+k = 50
+pct_treinamento = 0.8
+atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "tipo.dente.n", "arcada.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+classe = "status"
+metodo_na = "complete.cases"
+all_results = rbind(all_results, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na))
 
-# Criando um data frame com os rótulos do atributo classificador
-rotulos <- processed[1:n, 1]
 
-# Classe estimada do exemplar de teste
-classe_estimada <- knn(treinamento, teste, rotulos, k)
+all_results
 
-compare = data.frame(processed[n:t,]$falha, classe_estimada)
-corrects = length(compare$classe_estimada[compare$processed.n.t....falha == compare$classe_estimada])
 
-corrects / (t - n)
+
+
+
+
+
