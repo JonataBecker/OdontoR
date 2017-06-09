@@ -56,8 +56,8 @@
 #     - Oclusal = Incisal?
 
 # Carrega os dados iniciais
-#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
-data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
+data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
+#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
 # Pega as 3006 primeiras linhas, pois as outras linhas seriam em branco
 data <- data[c(0:3006), ]
 
@@ -282,3 +282,19 @@ data$superficies.restauradas.n = as.numeric(data$superficies.restauradas)
 data$status.n = as.numeric(data$status)
 data$adesivo.n = as.numeric(data$adesivo)
 data$material.preenchimento.n = as.numeric(data$material.preenchimento)
+
+data$numero.dente.fc = as.factor(data$numero.dente);
+data$superficie.lingual.palatal.fc = as.factor(data$superficie.lingual.palatal)
+data$superficie.vestibular.fc = as.factor(data$superficie.vestibular)
+data$superficie.oclusal.incisal.fc = as.factor(data$superficie.oclusal.incisal)
+data$superficie.oclusal.incisal.fc = as.factor(data$superficie.oclusal.incisal)
+data$superficie.mesial.fc = as.factor(data$superficie.mesial)
+data$superficie.distal.fc = as.factor(data$superficie.distal)
+
+# Agrupamento
+data$idade.ag = as.integer(data$idade)
+data$idade.ag[data$idade <= 10] = "criaca"
+data$idade.ag[data$idade > 10 & data$idade <= 17] = "adolesente"
+data$idade.ag[data$idade > 17 & data$idade <= 60] = "adulto"
+data$idade.ag[data$idade > 60] = "idoso"
+data$idade.ag = as.factor(data$idade.ag)
