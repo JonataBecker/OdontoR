@@ -56,8 +56,8 @@
 #     - Oclusal = Incisal?
 
 # Carrega os dados iniciais
-data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
-#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
+#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
+data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
 # Pega as 3006 primeiras linhas, pois as outras linhas seriam em branco
 data <- data[c(0:3006), ]
 
@@ -204,8 +204,12 @@ data$superficies.restauradas = as.character(data$superficies.restauradas)
 data$superficies.restauradas[data$superficies.restauradas == "INCISAL"] = "I"
 data$superficies.restauradas[data$superficies.restauradas == "99"] = NA
 data$superficies.restauradas = as.factor(data$superficies.restauradas)
+data$superficie.lingual = regexpr('L', data$superficies.restauradas) >= 0
+data$superficie.palatal = regexpr('P', data$superficies.restauradas) >= 0
 data$superficie.lingual.palatal = regexpr('L', data$superficies.restauradas) >= 0 | regexpr('P', data$superficies.restauradas) >= 0
 data$superficie.vestibular = regexpr('V', data$superficies.restauradas) >= 0
+data$superficie.oclusal = regexpr('O', data$superficies.restauradas) >= 0
+data$superficie.incisal = regexpr('I', data$superficies.restauradas) >= 0
 data$superficie.oclusal.incisal = regexpr('O', data$superficies.restauradas) >= 0 | regexpr('I', data$superficies.restauradas) >= 0
 data$superficie.mesial = regexpr('M', data$superficies.restauradas) >= 0
 data$superficie.distal = regexpr('D', data$superficies.restauradas) >= 0
@@ -277,11 +281,16 @@ data$superficie.oclusal.incisal.n = as.numeric(data$superficie.oclusal.incisal)
 data$superficie.oclusal.incisal.n = as.numeric(data$superficie.oclusal.incisal)
 data$superficie.mesial.n = as.numeric(data$superficie.mesial)
 data$superficie.distal.n = as.numeric(data$superficie.distal)
+data$superficie.lingual.n = as.numeric(data$superficie.lingual)
+data$superficie.palatal.n = as.numeric(data$superficie.palatal)
+data$superficie.oclusal.n = as.numeric(data$superficie.oclusal)
+data$superficie.incisal.n = as.numeric(data$superficie.incisal)
 data$classe.n = as.numeric(data$classe)
 data$superficies.restauradas.n = as.numeric(data$superficies.restauradas)
 data$status.n = as.numeric(data$status)
 data$adesivo.n = as.numeric(data$adesivo)
 data$material.preenchimento.n = as.numeric(data$material.preenchimento)
+data$vitalidade.n = as.numeric(data$vitalidade)
 
 data$numero.dente.fc = as.factor(data$numero.dente);
 data$superficie.lingual.palatal.fc = as.factor(data$superficie.lingual.palatal)
