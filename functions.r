@@ -17,7 +17,7 @@ test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   modelo <- rpart(formula, 
                   data=test$processed[1:test$treinamento,],
                   method="class",
-                  control=rpart.control(cp=0.0001),
+                  control=rpart.control(cp=0.001),
                   parms=list(split="Information"))
   rpart.plot(modelo, type = 3)
   classe_estimada <- predict(modelo, test$processed[test$treinamento:test$total,], "class")

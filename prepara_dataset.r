@@ -295,6 +295,7 @@ data$superficie.distal.fc = as.factor(data$superficie.distal)
 data$idade.ag = as.integer(data$idade)
 data$idade.ag[data$idade <= 10] = "criaca"
 data$idade.ag[data$idade > 10 & data$idade <= 17] = "adolesente"
-data$idade.ag[data$idade > 17 & data$idade <= 60] = "adulto"
+data$idade.ag[data$idade > 17 & data$idade <= 30] = "adulto jovem"
+data$idade.ag[data$idade > 30 & data$idade <= 60] = "adulto"
 data$idade.ag[data$idade > 60] = "idoso"
 data$idade.ag = as.factor(data$idade.ag)

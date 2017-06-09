@@ -1,17 +1,19 @@
 install.packages("rpart")
 install.packages("rpart.plot")
+install.packages("neuralnet")
 
 library(class)
 library(rpart)
 library(rpart.plot)
 library(grid)
 library(gridExtra)
+library(neuralnet)
 source("prepara_dataset.r")
 
 
 
 
-columns = c("status", "sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+columns = c("falha.n", "sexo.n","tipo.invervencao.n","novo.restauracao.n")
 columns = match(columns, names(data))
 columns = columns[!is.na(columns)]
 columns = as.numeric(columns)
@@ -72,3 +74,24 @@ sum(processed[n:t,]$status == classe_estimada) / (t - n)
 
 
 summary(processed$status)
+
+
+
+
+
+
+
+nn <- neuralnet(falha.n~sexo.n+tipo.invervencao.n+novo.restauracao.n,
+                data=processed[1:n,], hidden=5)
+
+previsao <- compute(nn, processed[n:t,][,2:4])
+
+previsao$net.result
+
+apply(previsao$net.result, 1, max)
+
+
+sum(processed[n:t,]$status == classe_estimada) / (t - n)
+
+plot(nn)
+
