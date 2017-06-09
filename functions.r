@@ -1,12 +1,18 @@
 library(class)
 
 # Função para testar um modelo KNN
-test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na) {
+test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na, normalizar) {
   test <- build_test_dataset(pct_treinamento, atributos, classe, metodo_na) 
+  if (normalizar) {
+    test$treinamentodf = normaliza_atributos_numericos(test$treinamentodf)
+    test$testedf = normaliza_atributos_numericos(test$testedf)
+  }
   # Classe estimada do exemplar de teste
   classe_estimada <- knn(test$treinamentodf, test$testedf, test$rotulos, k)
-  pct_acerto <- get_pct_acerto(test, classe_estimada)
-  data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
+#  print(table(classe_estimada))
+#  print(table(test$processed[test$treinamento:test$total,][classe]))
+  pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
+  data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, normalizar, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
 
 # Função para testar um modelo rpart
@@ -23,12 +29,12 @@ test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   classe_estimada <- predict(modelo, test$processed[test$treinamento:test$total,], "class")
   print(table(classe_estimada))
   print(table(test$processed[test$treinamento:test$total,][classe]))
-  pct_acerto <- get_pct_acerto(test, classe_estimada)
+  pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
   data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
 
 # Retorna o percentual de acerto
-get_pct_acerto <- function(test, classe_estimada) {
+get_pct_acerto <- function(test, classe_estimada, classe) {
   compare = data.frame(test$processed[test$treinamento:test$total,][classe], classe_estimada)
   names(compare)[1] = "real"
   corrects = length(compare$classe_estimada[compare$real == compare$classe_estimada])
@@ -44,8 +50,15 @@ build_test_dataset <- function(pct_treinamento, atributos, classe, metodo_na) {
   columns = as.numeric(columns)
   # Monta o array que será processado
   processed = data[, columns]
-  # Somente casos completos
-  processed = processed[complete.cases(processed),]
+  # Método NA - Remove registros que possuam NA
+  if (metodo_na == "complete.cases") {
+    processed = processed[complete.cases(processed),]
+  }
+  # Método NA - Preenche numéricos com a média e fatores com a moda. Outros tipos de colunas com NA serão removidas
+  if (metodo_na == "moda.media") {
+    processed = na_moda_media(processed)
+    processed = processed[complete.cases(processed),]
+  }
   total = nrow(processed)
   registros_processados = total
   treinamento = total * pct_treinamento
@@ -67,4 +80,39 @@ build_test_dataset <- function(pct_treinamento, atributos, classe, metodo_na) {
     )
 }
 
+# Normaliza atributos numéricos
+normaliza_atributos_numericos <- function(dataframe) {
+  data.frame(lapply( dataframe, function(x) {
+    if("numeric" %in% class(x) ) { 
+      x / max(x)
+    } else { 
+      x 
+    }
+  }))
+}
 
+# Converte NAs para média (numéricos) ou moda (fatores)
+na_moda_media <- function(dataframe) {
+  data.frame(lapply(names(dataframe), function(name) {
+    values = dataframe[, match(name, names(dataframe))]
+    # Se for numérico
+    if("numeric" %in% class(values) ) { 
+      # Se for um fator convertido para numérico
+      if (endsWith(name, ".n")) {
+        # Usa a moda
+        values[is.na(values)] = mode(values[complete.cases(values)])
+      } else {
+        # Usa a média
+        values[is.na(values)] = mean(values[complete.cases(values)])
+      }
+    }
+    # Se for factor
+    if("factor" %in% class(values) ) { 
+      # Usa a moda
+      values[is.na(values)] = mode(values[complete.cases(values)])
+    }
+    temp_df = data.frame(values)
+    names(temp_df) = c(name)
+    temp_df
+  }))
+}

@@ -63,7 +63,7 @@ all_results = rbind(all_results, test_knn("Classe status", k, pct_treinamento, a
 
 k = 50
 pct_treinamento = 0.8
-atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "tipo.dente.n", "arcada.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+atributos = c("idade", "tipo.dente.n")
 classe = "status"
 metodo_na = "complete.cases"
 all_results = rbind(all_results, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na))
@@ -71,9 +71,53 @@ all_results = rbind(all_results, test_knn("Menos atributos", k, pct_treinamento,
 
 all_results
 
+#[9] "vitalidade"                     "novo.restauracao"              "motivo"                        "numero.dente"                 
+#[13] "tipo.dente"                    "arcada"                        "lado"                          "tipo.restauracao"             
+#[17] "material.restauracao"          "classe"                        "superficies.restauradas"       "status"                       
+#[21] "censored"                      "data.falha.1"                  "data.falha.2"                  "tempo.censored"               
+#[25] "tempo.falha.sucesso"           "tempo.falha.falha"             "preco"                         "adesivo"                      
+#[29] "material.preenchimento"        "superficie.lingual.palatal"    "superficie.vestibular"         "superficie.oclusal.incisal"   
+#[33] "superficie.mesial"             "superficie.distal"             "superficies.restauradas.count" 
 
 
+summary(data)
+
+plot(data$vitalidade, data$status)
+  
+
+alfa = c("oi", "cara de boi", NA, "tchau", "cara de pau")
+num1 = c(1, 2, 3, 4, NA)
+num2.n = c(1, 2, NA, 4, 1)
+fact = as.factor(c("A", "A", "B", NA, "C"))
+df = data.frame(alfa, num1, fact, num2.n)
+
+df
+
+t = fact
+mode(t[complete.cases(t)])
+t[is.na(t)] = mode(t[complete.cases(t)])
+
+t
+
+class(df$fact)
+
+names(df$num1)
+
+dataframe = df
 
 
+mode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
 
-
+na_moda_media <- function(dataframe) {
+    data.frame(lapply( dataframe, function(x) {
+      if("numeric" %in% class(x) ) { 
+#        if(endsWith(x) ) {
+        x / max(x)
+      } else { 
+        x 
+      }
+    }))
+}
