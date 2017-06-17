@@ -4,6 +4,16 @@ source("functions.r")
 
 all_results_knn = data.frame()
 
+
+t <- data$classe[1]
+
+summary(t)
+
+
+
+
+write.csv2(data.frame(data$classe, data$classe.n), file= 'arquivooos.csv')
+
 k = 5
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
@@ -270,4 +280,4 @@ info <- data.frame(
 
 
 
-classifica_knn(info)
+classifica_rpart(info)

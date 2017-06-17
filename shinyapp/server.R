@@ -10,7 +10,12 @@ source("functions.r")
 # Define server logic required to generate and plot a random distribution
 shinyServer(function(input, output) {
 
-  getInfo <- function() {
+  getInfoKnn <- function() {
+    print(summary(input$sexo))
+    t1 <- input$sexo
+    t1 <- as.factor(input$sexo)
+    
+    
      info <- data.frame(
       "sexo.n" = input$sexo, 
       "idade" = input$idade, 
@@ -34,8 +39,35 @@ shinyServer(function(input, output) {
     info
   }
   
+  getInfoRpartRna <- function() {
+    info <- data.frame(
+      "sexo" = data$sexo[data$sexo.n == input$sexo][1], 
+      "idade.ag" = idadeToAg(input$idade), 
+      "classe" = data$classe[data$classe.n == input$classe & !is.na(data$classe)][1], 
+      "vitalidade" = data$vitalidade[data$vitalidade.n == input$vitalidade][1], 
+      "tipo.invervencao" = data$tipo.invervencao[data$tipo.invervencao.n == input$tipo.intervencao][1], 
+      "novo.restauracao" = data$novo.restauracao[data$novo.restauracao.n == input$novo.restauracao][1], 
+      "numero.dente" = data$numero.dente[data$numero.dente.n == input$numero.dente][1], 
+      "tipo.dente" = data$tipo.dente[data$tipo.dente.n == input$tipo.dente][1], 
+      "tipo.restauracao" = data$tipo.restauracao[data$tipo.restauracao.n == input$tipo.restauracao][1], 
+      "superficie.lingual.fc" = data$superficie.lingual[data$superficie.lingual.n == input$superficie.lingual][1], 
+      "superficie.palatal.fc" = data$superficie.palatal[data$superficie.palatal.n == input$superficie.palatal][1], 
+      "superficie.vestibular.fc" = data$superficie.vestibular[data$superficie.vestibular.n == input$superficie.vestibular][1], 
+      "superficie.oclusal.fc" = data$superficie.oclusal[data$superficie.oclusal.n == input$superficie.oclusal][1], 
+      "superficie.mesial.fc" = data$superficie.mesial[data$superficie.mesial.n == input$superficie.mesial][1], 
+      "superficie.distal.fc" = data$superficie.distal[data$superficie.distal.n == input$superficie.distal][1]
+    )
+    print(info)
+    info
+  }
+  
+  classifica <- function() {
+    ifelse(input$metodo == "knn", classifica_knn(getInfoKnn()),
+           classifica_rpart(getInfoRpartRna()))
+  }
+  
   output$result <- renderText({
-    classifica_knn(getInfo())
+    classifica()
   })
   
   output$algoritmoKnn <- renderTable({

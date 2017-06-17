@@ -61,7 +61,20 @@ shinyUI(
                           c("Não" = "0",
                             "Sim" = "1"), 0),                          
               textInput("vitalidade", "Vitalidade", 1),
-              textInput("classe", "Classe", 180)
+              
+              selectInput("classe", "Classe:",
+                          c("Faceta" = "5",
+                            "Reconstituição com pino" = "15",
+                            "Reconstituição" = "14",
+                            "Veneer" = "18",
+                            "Coroa" = "2",
+                            "Coroa pura" = "3",
+                            "Onlay" = "12",
+                            "Overlay" = "13",
+                            "Veneer+Ribbond" = "19",
+                            "Coroa sobre implante" = "4",
+                            "III+Veneer" = "10",
+                            "Aumento incisal" = "1"), 10)
             ),
             mainPanel(
               h3(textOutput("result"))

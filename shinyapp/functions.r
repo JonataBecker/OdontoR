@@ -17,7 +17,6 @@ test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na, nor
 
 # Executa classificação do KNN
 classifica_knn <- function(info) {
-  print(info)
   test <- build_test_dataset(1, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", "complete.cases") 
   classe_estimada <- knn(test$treinamentodf, info, test$rotulos, 50)
   ifelse(classe_estimada[1] == 1, "Tem falha", "Não tem falha") 
@@ -40,6 +39,22 @@ test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
   data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
+
+# Executa classificação por Rpart
+classifica_rpart <- function(info) {
+  atributos <- c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc")
+  test <- build_test_dataset(1, atributos, "falha", "complete.cases") 
+  formula <- as.formula(paste("falha", paste("~", paste(atributos, collapse= "+"))))
+  modelo <- rpart(formula, 
+                  data=test$processed[1:test$treinamento,],
+                  method="class",
+                  control=rpart.control(cp=0.001),
+                  parms=list(split="Information"))
+  classe_estimada <- predict(modelo, info, "class")
+  
+  ifelse(classe_estimada[1] == 1, "Rpart - Tem falha", "Rpart - Não tem falha") 
+}
+
 
 # Função para testar uma RNA
 test_rna <- function(nome, pct_treinamento, atributos, classe, metodo_na) {

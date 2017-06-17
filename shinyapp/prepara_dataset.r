@@ -310,7 +310,14 @@ data$falha.fc = as.factor(data$falha.n)
 data$idade.ag = as.integer(data$idade)
 data$idade.ag[data$idade <= 10] = "criaca"
 data$idade.ag[data$idade > 10 & data$idade <= 17] = "adolesente"
-data$idade.ag[data$idade > 17 & data$idade <= 30] = "adulto jovem"
 data$idade.ag[data$idade > 30 & data$idade <= 60] = "adulto"
 data$idade.ag[data$idade > 60] = "idoso"
 data$idade.ag = as.factor(data$idade.ag)
+
+idadeToAg <- function(idade) {
+  ag <- ifelse(idade <= 10, "criacao", 
+               ifelse(idade > 10 & idade <= 17, "adolesente", 
+                      ifelse(idade > 30 & idade <= 60, "adulto", 
+                             ifelse(idade > 60, "idoso", "")))) 
+  data$idade.ag[data$idade.ag == ag & !is.na(data$idade.ag)][1]  
+} 
