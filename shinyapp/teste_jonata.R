@@ -8,12 +8,16 @@ library(rpart.plot)
 library(grid)
 library(gridExtra)
 library(neuralnet)
+library(nnet)
 source("prepara_dataset.r")
+source("functions.r")
 
 
 
 
-columns = c("falha.n", "sexo.n","tipo.invervencao.n","novo.restauracao.n")
+data$falha.fa = as.factor(data$falha.n);
+
+columns = c("falha.fa", "sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")
 columns = match(columns, names(data))
 columns = columns[!is.na(columns)]
 columns = as.numeric(columns)
@@ -24,8 +28,13 @@ processed = processed[complete.cases(processed),]
 t = nrow(processed)
 n = t * 0.8
 
+processed = normaliza_atributos_numericos(processed)
+
+
 processed$status = as.factor(processed$status)
 
+
+processed
 
 
 nrow(processed)
@@ -80,18 +89,29 @@ summary(processed$status)
 
 
 
-
-nn <- neuralnet(falha.n~sexo.n+tipo.invervencao.n+novo.restauracao.n,
-                data=processed[1:n,], hidden=5)
-
-previsao <- compute(nn, processed[n:t,][,2:4])
-
-previsao$net.result
-
-apply(previsao$net.result, 1, max)
+processed$falha.fa = as.factor(processed$falha.n)
 
 
-sum(processed[n:t,]$status == classe_estimada) / (t - n)
+seedstrain 
+
+
+
+
+
+
+
+ideal <- class.ind(processed$falha.fa)
+
+summary(processed)
+
+nn <- nnet(falha.fa ~ ., data = processed[1:n,], size = 2)
+
+
+classe_estimada <-predict(nn, processed[n:t,-1], type="class")
+
+classe_estimada <- as.factor(classe_estimada)
+
+sum(processed[n:t,]$falha.fa == classe_estimada) / (t - n)
 
 plot(nn)
 

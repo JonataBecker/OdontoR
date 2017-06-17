@@ -15,6 +15,15 @@ test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na, nor
   data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, normalizar, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
 
+# Executa classificação do KNN
+classifica_knn <- function(info) {
+  print(info)
+  test <- build_test_dataset(1, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", "complete.cases") 
+  classe_estimada <- knn(test$treinamentodf, info, test$rotulos, 50)
+  ifelse(classe_estimada[1] == 1, "Tem falha", "Não tem falha") 
+}
+
+
 # Função para testar um modelo rpart
 test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   test <- build_test_dataset(pct_treinamento, atributos, classe, metodo_na) 

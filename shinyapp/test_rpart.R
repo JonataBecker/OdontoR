@@ -39,16 +39,11 @@ classe = "status"
 metodo_na = "complete.cases"
 all_results = rbind(all_results, test_rpart("Sem motivo - fatory - Idade com agrupamento", pct_treinamento, atributos, classe, metodo_na))
 
-<<<<<<< HEAD
 pct_treinamento = 0.7
-=======
-pct_treinamento = 0.8
->>>>>>> 6d842a5df0bf07d9dd477d4bdb5b532afa3cf03f
 atributos = c("sexo", "idade.ag", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "arcada", "lado", "tipo.restauracao", "material.restauracao", "superficie.lingual.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.incisal.fc", "superficie.mesial.fc", "superficie.distal.fc")
 classe = "falha"
 metodo_na = "complete.cases"
 all_results = rbind(all_results, test_rpart("Sem motivo - fatory - Idade com agrupamento", pct_treinamento, atributos, classe, metodo_na))
-<<<<<<< HEAD
 
 
 pct_treinamento = 0.7
@@ -57,20 +52,17 @@ classe = "falha"
 metodo_na = "complete.cases"
 all_results = rbind(all_results, test_rpart("Sem motivo - fatory - Idade com agrupamento", pct_treinamento, atributos, classe, metodo_na))
 
-
 pct_treinamento = 0.7
-atributos = c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "arcada", "lado", "tipo.restauracao", "material.restauracao", "superficie.lingual.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.incisal.fc", "superficie.mesial.fc", "superficie.distal.fc")
+atributos = c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "arcada", "lado", "tipo.restauracao", "material.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc")
 classe = "falha"
 metodo_na = "complete.cases"
 all_results = rbind(all_results, test_rpart("Sem motivo - fatory - Idade com agrupamento", pct_treinamento, atributos, classe, metodo_na))
 
+pct_treinamento = 0.7
+atributos = c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc")
+classe = "falha"
+metodo_na = "complete.cases"
+all_results = rbind(all_results, test_rpart("Sem motivo - fatory - Idade com agrupamento", pct_treinamento, atributos, classe, metodo_na))
 
-
-summary(data$classe)
-=======
-
-
-summary(data$falha)
->>>>>>> 6d842a5df0bf07d9dd477d4bdb5b532afa3cf03f
 
 all_results

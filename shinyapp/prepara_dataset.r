@@ -56,8 +56,8 @@
 #     - Oclusal = Incisal?
 
 # Carrega os dados iniciais
-#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
-data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
+data = read.csv2("../../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
+#data = read.csv2("../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
 # Pega as 3006 primeiras linhas, pois as outras linhas seriam em branco
 data <- data[c(0:3006), ]
 
@@ -294,9 +294,12 @@ data$vitalidade.n = as.numeric(data$vitalidade)
 
 data$numero.dente.fc = as.factor(data$numero.dente);
 data$superficie.lingual.palatal.fc = as.factor(data$superficie.lingual.palatal)
+data$superficie.lingual.fc = as.factor(data$superficie.lingual)
+data$superficie.palatal.fc = as.factor(data$superficie.palatal)
 data$superficie.vestibular.fc = as.factor(data$superficie.vestibular)
 data$superficie.oclusal.incisal.fc = as.factor(data$superficie.oclusal.incisal)
-data$superficie.oclusal.incisal.fc = as.factor(data$superficie.oclusal.incisal)
+data$superficie.oclusal.fc = as.factor(data$superficie.oclusal)
+data$superficie.incisal.fc = as.factor(data$superficie.incisal)
 data$superficie.mesial.fc = as.factor(data$superficie.mesial)
 data$superficie.distal.fc = as.factor(data$superficie.distal)
 
