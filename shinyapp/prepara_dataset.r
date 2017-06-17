@@ -304,6 +304,7 @@ data$superficie.oclusal.fc = as.factor(data$superficie.oclusal)
 data$superficie.incisal.fc = as.factor(data$superficie.incisal)
 data$superficie.mesial.fc = as.factor(data$superficie.mesial)
 data$superficie.distal.fc = as.factor(data$superficie.distal)
+data$falha.fc = as.factor(data$falha.n)
 
 # Agrupamento
 data$idade.ag = as.integer(data$idade)

@@ -15,7 +15,6 @@ shinyUI(
                           c("Masculino" = "2",
                             "Feminino" = "1"), 1),
               textInput("idade", "Idade", 42),
-              
               selectInput("tipo.intervencao", "Tipo de intervenção:",
                           c("Restauração" = "1",
                             "Esplintagem" = "2",
@@ -30,7 +29,6 @@ shinyUI(
                             "Canino" = "3",
                             "Pré-molar" = "4",
                             "Molar" = "5"), 5),
-              
               selectInput("arcada", "Tipo de dente:",
                           c("Inferior" = "1",
                             "Superior" = "2"), 2),
@@ -74,7 +72,38 @@ shinyUI(
                 "teste"
        ),
        tabPanel("Algoritmos",
-                "teste"
+         h2("KNN"),
+         sidebarLayout(
+            sidebarPanel(
+              textInput("knn.k", "K:", 50),
+              textInput("knn.pct_treinamento", "Percentual Treinamento:", 0.8),
+              textInput("knn.metodo_na", "Método NA:", "complete.cases"),
+              textInput("knn.normalizar", "Normalizar:", TRUE)
+            ),
+            mainPanel(
+              tableOutput("algoritmoKnn")
+            )
+         ),
+         h2("Árvore de decisão - RPART"),
+         sidebarLayout(
+           sidebarPanel(
+             textInput("rpart.pct_treinamento", "Percentual Treinamento:", 0.8),
+             textInput("rpart.metodo_na", "Método NA:", "complete.cases")
+           ),
+           mainPanel(
+             tableOutput("algoritmoRpart")
+           )
+         ),
+         h2("RNA"),
+         sidebarLayout(
+           sidebarPanel(
+             textInput("rna.pct_treinamento", "Percentual Treinamento:", 0.7),
+             textInput("rna.metodo_na", "Método NA:", "complete.cases")
+           ),
+           mainPanel(
+             tableOutput("algoritmoRna")
+           )
+         )         
        )
   )
 )

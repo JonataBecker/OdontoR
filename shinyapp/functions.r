@@ -23,7 +23,6 @@ classifica_knn <- function(info) {
   ifelse(classe_estimada[1] == 1, "Tem falha", "Não tem falha") 
 }
 
-
 # Função para testar um modelo rpart
 test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   test <- build_test_dataset(pct_treinamento, atributos, classe, metodo_na) 
@@ -41,6 +40,17 @@ test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
   data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
+
+# Função para testar uma RNA
+test_rna <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
+  test <- build_test_dataset(pct_treinamento, atributos, classe, metodo_na) 
+  formula <- as.formula(paste(classe, " ~ ."))
+  nn <- nnet(formula, data = test$processed[test$treinamento:test$total,], size = 2)
+  classe_estimada <-predict(nn, test$processed[test$treinamento:test$total,], "class")
+  pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
+  data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
+}
+
 
 # Retorna o percentual de acerto
 get_pct_acerto <- function(test, classe_estimada, classe) {

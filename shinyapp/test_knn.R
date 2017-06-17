@@ -28,6 +28,28 @@ metodo_na = "complete.cases"
 normalizar = FALSE
 all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
 
+
+ret <- test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)
+
+summary(ret)
+
+ret
+
+data.frame("Atributo" = names(ret), "Valor" = unlist(ret) )
+
+as.array(ret[names(ret)])
+
+t(ret)
+
+as.table(ret)
+
+summary(unlist(ret))
+
+mm1 <- as.matrix(ret)
+mm2 <- matrix(mm1, ncol = ncol(ret), dimnames = NULL)
+
+
+
 k = 50
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")

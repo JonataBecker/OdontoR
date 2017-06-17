@@ -12,9 +12,6 @@ library(nnet)
 source("prepara_dataset.r")
 source("functions.r")
 
-
-
-
 data$falha.fa = as.factor(data$falha.n);
 
 columns = c("falha.fa", "sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")
@@ -29,7 +26,6 @@ t = nrow(processed)
 n = t * 0.8
 
 processed = normaliza_atributos_numericos(processed)
-
 
 processed$status = as.factor(processed$status)
 
