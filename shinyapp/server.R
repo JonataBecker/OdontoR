@@ -3,12 +3,9 @@ library(shiny)
 source("prepara_dataset.r")
 source("functions.r")
 
-
 # Define server logic required to generate and plot a random distribution
 shinyServer(function(input, output) {
-  
-   
-  
+
   getInfo <- function() {
      info <- data.frame(
       "sexo.n" = input$sexo, 
