@@ -61,6 +61,8 @@ data = read.csv2("../../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-88
 # Pega as 3006 primeiras linhas, pois as outras linhas seriam em branco
 data <- data[c(0:3006), ]
 
+data$tipo.invervencao
+
 # Remove colunas inúteis/que não teriam suporte suficiente
 #  pino                - 2992 em branco, 1 inválido, 13 válidos
 #  name                - Nome
