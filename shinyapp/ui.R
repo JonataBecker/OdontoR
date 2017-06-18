@@ -9,7 +9,7 @@ shinyUI(
             sidebarPanel(
               selectInput("metodo", "Método:",
                           c("KNN" = "knn",
-                            "Árvore de decisão" = "rpar",
+                            "Árvore de decisão" = "rpart",
                             "RNA" = "rna")),
               selectInput("sexo", "Sexo:",
                           c("Masculino" = "2",

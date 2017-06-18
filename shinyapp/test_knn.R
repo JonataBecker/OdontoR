@@ -4,16 +4,6 @@ source("functions.r")
 
 all_results_knn = data.frame()
 
-
-t <- data$classe[1]
-
-summary(t)
-
-
-
-
-write.csv2(data.frame(data$classe, data$classe.n), file= 'arquivooos.csv')
-
 k = 5
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
@@ -37,28 +27,6 @@ classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
 all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
-
-
-ret <- test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)
-
-summary(ret)
-
-ret
-
-data.frame("Atributo" = names(ret), "Valor" = unlist(ret) )
-
-as.array(ret[names(ret)])
-
-t(ret)
-
-as.table(ret)
-
-summary(unlist(ret))
-
-mm1 <- as.matrix(ret)
-mm2 <- matrix(mm1, ncol = ncol(ret), dimnames = NULL)
-
-
 
 k = 50
 pct_treinamento = 0.8
@@ -278,6 +246,13 @@ info <- data.frame(
 #"sexo.n" = 1, "idade" = 42, "tipo.invervencao.n" = 3, "novo.restauracao.n" = 1, "numero.dente" = 15, "tipo.dente.n" = 5, "arcada.n" = 2, "lado.n" = 1, "tipo.restauracao.n" = 1, "material.restauracao.n" = 2, "superficie.lingual.n" = 0, "superficie.palatal.n" = 0, "superficie.vestibular.n" = 1, "superficie.oclusal.n" = 0, "superficie.mesial.n" = 0, "superficie.distal.n" = 0, "vitalidade.n" = 1, "classe.n" = 180
 #)
 
+
+summary(data$falha)
+
+summary(data$falha.fc)
+
+
+data[data$falha==0, ]
 
 
 classifica_rpart(info)

@@ -13,11 +13,6 @@ source("functions.r")
 shinyServer(function(input, output) {
 
   getInfoKnn <- function() {
-    print(summary(input$sexo))
-    t1 <- input$sexo
-    t1 <- as.factor(input$sexo)
-    
-    
      info <- data.frame(
       "sexo.n" = input$sexo, 
       "idade" = input$idade, 
@@ -33,7 +28,7 @@ shinyServer(function(input, output) {
       "superficie.palatal.n" = input$superficie.palatal, 
       "superficie.vestibular.n" = input$superficie.vestibular, 
       "superficie.oclusal.n" = input$superficie.oclusal, 
-      "superficie.mesial.n" = input$superficie.vestibular, 
+      "superficie.mesial.n" = input$superficie.mesial, 
       "superficie.distal.n" = input$superficie.distal, 
       "vitalidade.n" = input$vitalidade, 
       "classe.n" = input$classe
@@ -52,20 +47,20 @@ shinyServer(function(input, output) {
       "numero.dente" = data$numero.dente[data$numero.dente.n == input$numero.dente][1], 
       "tipo.dente" = data$tipo.dente[data$tipo.dente.n == input$tipo.dente][1], 
       "tipo.restauracao" = data$tipo.restauracao[data$tipo.restauracao.n == input$tipo.restauracao][1], 
-      "superficie.lingual.fc" = data$superficie.lingual[data$superficie.lingual.n == input$superficie.lingual][1], 
-      "superficie.palatal.fc" = data$superficie.palatal[data$superficie.palatal.n == input$superficie.palatal][1], 
-      "superficie.vestibular.fc" = data$superficie.vestibular[data$superficie.vestibular.n == input$superficie.vestibular][1], 
-      "superficie.oclusal.fc" = data$superficie.oclusal[data$superficie.oclusal.n == input$superficie.oclusal][1], 
-      "superficie.mesial.fc" = data$superficie.mesial[data$superficie.mesial.n == input$superficie.mesial][1], 
-      "superficie.distal.fc" = data$superficie.distal[data$superficie.distal.n == input$superficie.distal][1]
+      "superficie.lingual.fc" = data$superficie.lingual.fc[data$superficie.lingual.n == input$superficie.lingual][1], 
+      "superficie.palatal.fc" = data$superficie.palatal.fc[data$superficie.palatal.n == input$superficie.palatal][1], 
+      "superficie.vestibular.fc" = data$superficie.vestibular.fc[data$superficie.vestibular.n == input$superficie.vestibular][1], 
+      "superficie.oclusal.fc" = data$superficie.oclusal.fc[data$superficie.oclusal.n == input$superficie.oclusal][1], 
+      "superficie.mesial.fc" = data$superficie.mesial.fc[data$superficie.mesial.n == input$superficie.mesial][1], 
+      "superficie.distal.fc" = data$superficie.distal.fc[data$superficie.distal.n == input$superficie.distal][1]
     )
-    print(info)
     info
   }
   
   classifica <- function() {
     ifelse(input$metodo == "knn", classifica_knn(getInfoKnn()),
-           classifica_rpart(getInfoRpartRna()))
+           ifelse(input$metodo == "rpart", classifica_rpart(getInfoRpartRna()),
+                  classifica_rna(getInfoRpartRna())))
   }
   
   output$result <- renderText({
@@ -78,7 +73,7 @@ shinyServer(function(input, output) {
   })
   
   output$algoritmoRpart <- renderTable({
-    result <- test_rpart("RPART", as.numeric(input$rpart.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha", input$rpart.metodo_na)
+    result <- test_rpart("RPART", as.numeric(input$rpart.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.n", input$rpart.metodo_na)
     data.frame("Atributo" = names(result), "Valor" = t(result) )
   })
   
