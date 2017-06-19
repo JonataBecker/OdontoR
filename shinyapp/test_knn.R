@@ -242,17 +242,30 @@ info <- data.frame(
   "sexo.n" = 1, "idade" = 50, "tipo.invervencao.n" = 9, "novo.restauracao.n" = 2, "numero.dente" = 25, "tipo.dente.n" = 2, "arcada.n" = 2, "lado.n" = 2, "tipo.restauracao.n" = 1, "material.restauracao.n" = 2, "superficie.lingual.n" = 1, "superficie.palatal.n" = 1, "superficie.vestibular.n" = 2, "superficie.oclusal.n" = 1, "superficie.mesial.n" = 1, "superficie.distal.n" = 1, "vitalidade.n" = 2, "classe.n" = 1
 )
 
-#info <- data.frame(
-#"sexo.n" = 1, "idade" = 42, "tipo.invervencao.n" = 3, "novo.restauracao.n" = 1, "numero.dente" = 15, "tipo.dente.n" = 5, "arcada.n" = 2, "lado.n" = 1, "tipo.restauracao.n" = 1, "material.restauracao.n" = 2, "superficie.lingual.n" = 0, "superficie.palatal.n" = 0, "superficie.vestibular.n" = 1, "superficie.oclusal.n" = 0, "superficie.mesial.n" = 0, "superficie.distal.n" = 0, "vitalidade.n" = 1, "classe.n" = 180
-#)
+info <- data.frame(
+"sexo.n" = 1, "idade" = 42, "tipo.invervencao.n" = 3, "novo.restauracao.n" = 1, "numero.dente" = 15, "tipo.dente.n" = 5, "arcada.n" = 2, "lado.n" = 1, "tipo.restauracao.n" = 1, "material.restauracao.n" = 2, "superficie.lingual.n" = 0, "superficie.palatal.n" = 0, "superficie.vestibular.n" = 1, "superficie.oclusal.n" = 0, "superficie.mesial.n" = 0, "superficie.distal.n" = 0, "vitalidade.n" = 1, "classe.n" = 18
+)
 
+
+test <- build_test_dataset(1, c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.fc", "complete.cases") 
+
+
+test$processed[test$processed$falha == 1,][1,]
 
 summary(data$falha)
 
-summary(data$falha.fc)
 
 
-data[data$falha==0, ]
+rinfo
+
+nrow(test$processed[test$processed$falha == 1,])
+
+test$processed[test$processed$falha == 1,][50,2:16]
 
 
-classifica_rpart(info)
+test$processed[test$processed$falha == 2,]
+
+data[data$falha == 0,][1,]
+
+
+classifica_rna(test$processed[test$processed$falha.fc == 2,][5,2:16])

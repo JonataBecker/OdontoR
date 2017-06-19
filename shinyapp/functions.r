@@ -15,15 +15,8 @@ test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na, nor
 
 # Executa classificação do KNN
 classifica_knn <- function(info) {
-  test <- build_test_dataset(1, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha.n", "complete.cases") 
+  test <- build_test_dataset(1, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", "complete.cases") 
   classe_estimada <- knn(test$treinamentodf, info, test$rotulos, 50)
-  print(nrow(test$processed[test$processed$falha == 1,]))
-  
-  
-  print(info)
-  print(test$processed[test$processed$falha == 1,])
-  print(classe_estimada[1])
-  
   ifelse(classe_estimada[1] == 1, "knn - Tem falha", "knn - Não tem falha") 
 }
 
@@ -70,7 +63,7 @@ test_rna <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
 # Executa classificaçao por RNA
 classifica_rna <- function(info) {
   atributos <- c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc")
-  test <- build_test_dataset(1, atributos, "falha.fc", "complete.cases") 
+  test <- build_test_dataset(0.8, atributos, "falha.fc", "complete.cases") 
   formula <- as.formula(paste("falha.fc", " ~ ."))
   nn <- nnet(formula, data = test$processed[test$treinamento:test$total,], size = 2)
   classe_estimada <-predict(nn, info, "class")  

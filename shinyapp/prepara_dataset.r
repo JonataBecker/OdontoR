@@ -56,8 +56,8 @@
 #     - Oclusal = Incisal?
 
 # Carrega os dados iniciais
-#data = read.csv2("../../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
-data = read.csv2("../../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
+data = read.csv2("../../dados_odntologicos_caxias_sul.csv", fileEncoding="ISO-8859-1")
+#data = read.csv2("../../dados_odntologicos_caxias_sul.csv", fileEncoding="windows-1252")
 # Pega as 3006 primeiras linhas, pois as outras linhas seriam em branco
 data <- data[c(0:3006), ]
 
