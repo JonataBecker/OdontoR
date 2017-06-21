@@ -137,7 +137,7 @@ na_moda_media <- function(dataframe) {
       # Se for um fator convertido para numérico
       if (endsWith(name, ".n")) {
         # Usa a moda
-        values[is.na(values)] = mode(values[complete.cases(values)])
+        values[is.na(values)] = getmode(values[complete.cases(values)])
       } else {
         # Usa a média
         values[is.na(values)] = mean(values[complete.cases(values)])
@@ -146,10 +146,16 @@ na_moda_media <- function(dataframe) {
     # Se for factor
     if("factor" %in% class(values) ) { 
       # Usa a moda
-      values[is.na(values)] = mode(values[complete.cases(values)])
+      m <- getmode(values[complete.cases(values)])
+      values[is.na(values)] = values[values == m & !is.na(values)] 
     }
     temp_df = data.frame(values)
     names(temp_df) = c(name)
     temp_df
   }))
+}
+
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
 }

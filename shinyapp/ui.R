@@ -62,18 +62,25 @@ shinyUI(
                             "Sim" = "1"), 0),                          
               textInput("vitalidade", "Vitalidade", 2),
               selectInput("classe", "Classe:",
-                          c("Faceta" = "5",
-                            "Reconstituição com pino" = "15",
-                            "Reconstituição" = "14",
-                            "Veneer" = "18",
+                          c("Aumento incisal" = "1",
                             "Coroa" = "2",
                             "Coroa pura" = "3",
+                            "Coroa sobre implante" = "4",
+                            "Faceta" = "5",
+                            "I" = "6",
+                            "I+V" = "7",
+                            "II" = "8",
+                            "III" = "9",
+                            "III+Veneer" = "10",
+                            "IV" = "11",
                             "Onlay" = "12",
                             "Overlay" = "13",
-                            "Veneer+Ribbond" = "19",
-                            "Coroa sobre implante" = "4",
-                            "III+Veneer" = "10",
-                            "Aumento incisal" = "1"), 18)
+                            "Reconstituição" = "14",
+                            "Reconstituição com pino" = "15",
+                            "V" = "16",
+                            "V+I" = "17",
+                            "Veneer" = "18",
+                            "Veneer+Ribbond" = "19"), 18)
             ),
             mainPanel(
               h3(textOutput("result"))
@@ -384,8 +391,12 @@ shinyUI(
             sidebarPanel(
               textInput("knn.k", "K:", 50),
               textInput("knn.pct_treinamento", "Percentual Treinamento:", 0.8),
-              textInput("knn.metodo_na", "Método NA:", "complete.cases"),
-              textInput("knn.normalizar", "Normalizar:", TRUE)
+              selectInput("knn.metodo_na", "Método NA:",
+                          c("complete.cases" = "complete.cases",
+                            "moda.media" = "moda.media"), "complete.cases"),
+              selectInput("knn.normalizar", "Normalizar:",
+                          c("Não" = "FALSE",
+                            "Sim" = "TRUE"), TRUE)
             ),
             mainPanel(
               tableOutput("algoritmoKnn")
@@ -395,7 +406,9 @@ shinyUI(
          sidebarLayout(
            sidebarPanel(
              textInput("rpart.pct_treinamento", "Percentual Treinamento:", 0.8),
-             textInput("rpart.metodo_na", "Método NA:", "complete.cases")
+             selectInput("rpart.metodo_na", "Método NA:",
+                         c("complete.cases" = "complete.cases",
+                           "moda.media" = "moda.media"), "complete.cases")
            ),
            mainPanel(
              tableOutput("algoritmoRpart")
@@ -405,7 +418,9 @@ shinyUI(
          sidebarLayout(
            sidebarPanel(
              textInput("rna.pct_treinamento", "Percentual Treinamento:", 0.7),
-             textInput("rna.metodo_na", "Método NA:", "complete.cases")
+             selectInput("rna.metodo_na", "Método NA:",
+                         c("complete.cases" = "complete.cases",
+                           "moda.media" = "moda.media"), "complete.cases")
            ),
            mainPanel(
              tableOutput("algoritmoRna")

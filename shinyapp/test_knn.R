@@ -146,7 +146,7 @@ all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_trei
 
 k = 30
 pct_treinamento = 0.8
-atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
+atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n",  "vitalidade.n", "classe.n")
 classe = "falha"
 metodo_na = "moda.media"
 all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
@@ -157,6 +157,11 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "moda.media"
 all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+
+
+
+test_knn("KNN", 30, 0.8, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", "moda.media", TRUE)
+
 
 k = 30
 pct_treinamento = 0.6
@@ -178,6 +183,8 @@ result[result$test.registros_processados > 1000 & result$pct_treinamento > 0.6 &
 
 write.csv2(result[result$test.registros_processados > 1000 & result$pct_treinamento > 0.6 & result$pct_treinamento < 0.9 & result$pct_acerto > 0.72, ], file= 'arquivooos.csv')
 
+
+summary(data$classe)
 
 testa_tudo <- function() {
   result = data.frame()
