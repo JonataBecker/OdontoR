@@ -11,7 +11,7 @@ test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na, nor
   classe_estimada <- knn(test$treinamentodf, test$testedf, test$rotulos, k)
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
   matriz_confusao <- monta_matriz_confusao(classe_estimada, test, classe) 
-  data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, normalizar, test$registros_processados, test$treinamento, test$teste, pct_acerto)
+  list(info = data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, normalizar, test$registros_processados, test$treinamento, test$teste, pct_acerto), matriz_confusao = matriz_confusao)
 }
 
 # Executa classificação do KNN
@@ -37,7 +37,6 @@ test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   list(info = data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto), matriz_confusao = matriz_confusao)
 }
 
-
 # Executa classificação por Rpart
 classifica_rpart <- function(info) {
   atributos <- c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc")
@@ -60,7 +59,7 @@ test_rna <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   classe_estimada <-predict(nn, test$processed[test$treinamento:test$total,], "class")
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
   matriz_confusao <- monta_matriz_confusao(classe_estimada, test, classe)
-  data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
+  list(info = data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto), matriz_confusao = matriz_confusao)
 }
 
 # Executa classificaçao por RNA

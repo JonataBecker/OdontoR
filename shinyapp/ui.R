@@ -399,7 +399,8 @@ shinyUI(
                             "Sim" = "TRUE"), TRUE)
             ),
             mainPanel(
-              tableOutput("algoritmoKnn")
+              tableOutput("algoritmoKnn"),
+              verbatimTextOutput("algoritmoKnnConfusao")
             )
          ),
          h2("Árvore de decisão - RPART"),
@@ -424,7 +425,8 @@ shinyUI(
                            "moda.media" = "moda.media"), "complete.cases")
            ),
            mainPanel(
-             tableOutput("algoritmoRna")
+             tableOutput("algoritmoRna"),
+             verbatimTextOutput("algoritmoRnaConfusao")
            )
          )         
        )

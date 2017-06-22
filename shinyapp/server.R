@@ -63,29 +63,48 @@ shinyServer(function(input, output) {
                   classifica_rna(getInfoRpartRna())))
   }
   
+  getResultKnn <- function() {
+    result <- test_knn("KNN", as.numeric(input$knn.k), as.numeric(input$knn.pct_treinamento), c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", input$knn.metodo_na, input$knn.normalizar)
+  }
+  
+  getResultRpart <- function() {
+    result <- test_rpart("RPART", as.numeric(input$rpart.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.n", input$rpart.metodo_na)
+  }
+
+  getResultRna <- function() {
+    result <- test_rna("RNA", as.numeric(input$rna.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.fc", input$rna.metodo_na)
+  }
+    
   output$result <- renderText({
     classifica()
   })
   
   output$algoritmoKnn <- renderTable({
-    result <- test_knn("KNN", as.numeric(input$knn.k), as.numeric(input$knn.pct_treinamento), c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", input$knn.metodo_na, input$knn.normalizar)
+    result <- getResultKnn()$info
     data.frame("Atributo" = names(result), "Valor" = t(result) )
   })
-  
+
+  output$algoritmoKnnConfusao <- renderPrint({
+      getResultKnn()$matriz_confusao
+  })
+    
   output$algoritmoRpart <- renderTable({
-    result <- test_rpart("RPART", as.numeric(input$rpart.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.n", input$rpart.metodo_na)$info
+    result <- getResultRpart()$info
     data.frame("Atributo" = names(result), "Valor" = t(result) )
   })
   
   output$algoritmoRpartConfusao <- renderPrint({
-    result <- test_rpart("RPART", as.numeric(input$rpart.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.n", input$rpart.metodo_na)$matriz_confusao
-    result
+     getResultRpart()$matriz_confusao
   })
   
   output$algoritmoRna <- renderTable({
-    result <- test_rna("RNA", as.numeric(input$rna.pct_treinamento), c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.fc", input$rna.metodo_na)
+    result <- getResultRna()$info
     data.frame("Atributo" = names(result), "Valor" = t(result) )
   })  
+  
+  output$algoritmoRnaConfusao <- renderPrint({
+    getResultRna()$matriz_confusao
+  })
   
   output$plot_falha <- renderPlot({
     plot_falha = as.character(data$falha.s)

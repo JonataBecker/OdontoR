@@ -10,7 +10,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restaur
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 50
 pct_treinamento = 0.8
@@ -18,7 +18,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restaur
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 200
 pct_treinamento = 0.8
@@ -26,7 +26,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restaur
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 50
 pct_treinamento = 0.8
@@ -34,7 +34,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restaur
 classe = "status"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 50
 pct_treinamento = 0.8
@@ -42,7 +42,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "ti
 classe = "status"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 50
 pct_treinamento = 0.8
@@ -50,7 +50,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "ti
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 20
 pct_treinamento = 0.8
@@ -58,7 +58,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 23
 pct_treinamento = 0.8
@@ -66,7 +66,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.8
@@ -74,7 +74,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 50
 pct_treinamento = 0.8
@@ -82,7 +82,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 200
 pct_treinamento = 0.8
@@ -90,7 +90,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 20
 pct_treinamento = 0.8
@@ -98,7 +98,7 @@ atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "nu
 classe = "falha"
 metodo_na = "complete.cases"
 normalizar = FALSE
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 normalizar = TRUE
 
@@ -107,68 +107,63 @@ pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
 classe = "falha"
 metodo_na = "complete.cases"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
 classe = "falha"
 metodo_na = "complete.cases"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 50
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
 classe = "falha"
 metodo_na = "complete.cases"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 200
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
 classe = "falha"
 metodo_na = "complete.cases"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")
 classe = "falha"
 metodo_na = "complete.cases"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")
 classe = "falha"
 metodo_na = "moda.media"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.8
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n",  "vitalidade.n", "classe.n")
 classe = "falha"
 metodo_na = "moda.media"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.6
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")
 classe = "falha"
 metodo_na = "moda.media"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
-
-
-
-test_knn("KNN", 30, 0.8, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", "moda.media", TRUE)
-
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 k = 30
 pct_treinamento = 0.6
 atributos = c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")
 classe = "falha"
 metodo_na = "complete.cases"
-all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+all_results_knn = rbind(all_results_knn, test_knn("Menos atributos", k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
 
 
 result = testa_tudo()
@@ -188,10 +183,10 @@ summary(data$classe)
 
 testa_tudo <- function() {
   result = data.frame()
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")))
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")))
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")))
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")))
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"))$info)
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"))$info)
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n"))$info)
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n"))$info)
   nrow(result)
   result[order(result$pct_acerto),]
 }
@@ -237,42 +232,3 @@ testa_varios_k <- function(name, pct_treinamento, atributos, classe, metodo_na, 
   result
 }
 
-
-
-classifica_knn <- function(info) {
-  test <- build_test_dataset(1, c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"), "falha", "complete.cases") 
-  classe_estimada <- knn(test$treinamentodf, info, test$rotulos, 50)
-  ifelse(classe_estimada[1] == 1, "Tem falha", "Não tem falha") 
-}
-
-info <- data.frame(
-  "sexo.n" = 1, "idade" = 50, "tipo.invervencao.n" = 9, "novo.restauracao.n" = 2, "numero.dente" = 25, "tipo.dente.n" = 2, "arcada.n" = 2, "lado.n" = 2, "tipo.restauracao.n" = 1, "material.restauracao.n" = 2, "superficie.lingual.n" = 1, "superficie.palatal.n" = 1, "superficie.vestibular.n" = 2, "superficie.oclusal.n" = 1, "superficie.mesial.n" = 1, "superficie.distal.n" = 1, "vitalidade.n" = 2, "classe.n" = 1
-)
-
-info <- data.frame(
-"sexo.n" = 1, "idade" = 42, "tipo.invervencao.n" = 3, "novo.restauracao.n" = 1, "numero.dente" = 15, "tipo.dente.n" = 5, "arcada.n" = 2, "lado.n" = 1, "tipo.restauracao.n" = 1, "material.restauracao.n" = 2, "superficie.lingual.n" = 0, "superficie.palatal.n" = 0, "superficie.vestibular.n" = 1, "superficie.oclusal.n" = 0, "superficie.mesial.n" = 0, "superficie.distal.n" = 0, "vitalidade.n" = 1, "classe.n" = 18
-)
-
-
-test <- build_test_dataset(1, c("sexo", "idade.ag", "classe", "vitalidade", "tipo.invervencao", "novo.restauracao", "numero.dente", "tipo.dente", "tipo.restauracao", "superficie.lingual.fc", "superficie.palatal.fc", "superficie.vestibular.fc", "superficie.oclusal.fc", "superficie.mesial.fc", "superficie.distal.fc"), "falha.fc", "complete.cases") 
-
-
-test$processed[test$processed$falha == 1,][1,]
-
-summary(data$falha)
-
-
-
-rinfo
-
-nrow(test$processed[test$processed$falha == 1,])
-
-test$processed[test$processed$falha == 1,][50,2:16]
-
-
-test$processed[test$processed$falha == 2,]
-
-data[data$falha == 0,][1,]
-
-
-classifica_rna(test$processed[test$processed$falha.fc == 2,][5,2:16])
