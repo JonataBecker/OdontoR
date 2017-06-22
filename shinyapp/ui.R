@@ -411,7 +411,8 @@ shinyUI(
                            "moda.media" = "moda.media"), "complete.cases")
            ),
            mainPanel(
-             tableOutput("algoritmoRpart")
+             tableOutput("algoritmoRpart"),
+             verbatimTextOutput("algoritmoRpartConfusao")
            )
          ),
          h2("RNA"),

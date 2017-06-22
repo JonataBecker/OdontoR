@@ -10,6 +10,7 @@ test_knn <- function(nome, k, pct_treinamento, atributos, classe, metodo_na, nor
   # Classe estimada do exemplar de teste
   classe_estimada <- knn(test$treinamentodf, test$testedf, test$rotulos, k)
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
+  matriz_confusao <- monta_matriz_confusao(classe_estimada, test, classe) 
   data.frame(nome, k, pct_treinamento, length(atributos), classe, metodo_na, normalizar, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
 
@@ -23,18 +24,19 @@ classifica_knn <- function(info) {
 # Função para testar um modelo rpart
 test_rpart <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   test <- build_test_dataset(pct_treinamento, atributos, classe, metodo_na) 
-  # Classe estimada do exemplar de teste
   formula <- as.formula(paste(classe, paste("~", paste(atributos, collapse= "+"))))
   modelo <- rpart(formula, 
                   data=test$processed[1:test$treinamento,],
                   method="class",
                   control=rpart.control(cp=0.001),
                   parms=list(split="Information"))
-  rpart.plot(modelo, type = 3)
+  #rpart.plot(modelo, type = 3)
   classe_estimada <- predict(modelo, test$processed[test$treinamento:test$total,], "class")
+  matriz_confusao <- monta_matriz_confusao(classe_estimada, test, classe)
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
-  data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
+  list(info = data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto), matriz_confusao = matriz_confusao)
 }
+
 
 # Executa classificação por Rpart
 classifica_rpart <- function(info) {
@@ -57,6 +59,7 @@ test_rna <- function(nome, pct_treinamento, atributos, classe, metodo_na) {
   nn <- nnet(formula, data = test$processed[test$treinamento:test$total,], size = 2)
   classe_estimada <-predict(nn, test$processed[test$treinamento:test$total,], "class")
   pct_acerto <- get_pct_acerto(test, classe_estimada, classe)
+  matriz_confusao <- monta_matriz_confusao(classe_estimada, test, classe)
   data.frame(nome, pct_treinamento, length(atributos), classe, metodo_na, test$registros_processados, test$treinamento, test$teste, pct_acerto)
 }
 
@@ -153,6 +156,10 @@ na_moda_media <- function(dataframe) {
     names(temp_df) = c(name)
     temp_df
   }))
+}
+
+monta_matriz_confusao <- function(classe_estimada, test, classe) {
+  table(classe_estimada, t(test$processed[test$treinamento:test$total,][classe]))
 }
 
 getmode <- function(v) {
