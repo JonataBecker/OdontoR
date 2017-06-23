@@ -94,7 +94,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_falha"),
-            plotOutput("plot_status")
+            plotOutput("plot_status", width = "98%")
           ),
           splitLayout(
             h3("sexo"),
@@ -102,47 +102,19 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_sexo"),
-            plotOutput("plot_sexo_vs_falha")
+            plotOutput("plot_sexo_vs_falha", width = "98%")
           ),
-          splitLayout(
-            h3("nascimento"),
-            h3("nascimento vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_nascimento"),
-            plotOutput("plot_nascimento_vs_falha")
-          ),
-          splitLayout(
-            h3("data.intervencao"),
-            h3("data.intervencao vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_data.intervencao"),
-            plotOutput("plot_data.intervencao_vs_falha")
-          ),
-          splitLayout(
-            h3("data.final"),
-            h3("data.final vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_data.final"),
-            plotOutput("plot_data.final_vs_falha")
-          ),
+          h3("nascimento"),
+          plotOutput("plot_nascimento"),
+          h3("data.intervencao"),
+          plotOutput("plot_data.intervencao"),
           splitLayout(
             h3("idade"),
             h3("idade vs Falha")
           ),
           splitLayout(
             plotOutput("plot_idade"),
-            plotOutput("plot_idade_vs_falha")
-          ),
-          splitLayout(
-            h3("tipo.invervencao"),
-            h3("tipo.invervencao vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_tipo.invervencao"),
-            plotOutput("plot_tipo.invervencao_vs_falha")
+            plotOutput("plot_idade_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("vitalidade"),
@@ -150,7 +122,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_vitalidade"),
-            plotOutput("plot_vitalidade_vs_falha")
+            plotOutput("plot_vitalidade_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("novo.restauracao"),
@@ -158,23 +130,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_novo.restauracao"),
-            plotOutput("plot_novo.restauracao_vs_falha")
-          ),
-          splitLayout(
-            h3("motivo"),
-            h3("motivo vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_motivo"),
-            plotOutput("plot_motivo_vs_falha")
-          ),
-          splitLayout(
-            h3("numero.dente"),
-            h3("numero.dente vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_numero.dente"),
-            plotOutput("plot_numero.dente_vs_falha")
+            plotOutput("plot_novo.restauracao_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("tipo.dente"),
@@ -182,7 +138,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_tipo.dente"),
-            plotOutput("plot_tipo.dente_vs_falha")
+            plotOutput("plot_tipo.dente_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("arcada"),
@@ -190,31 +146,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_arcada"),
-            plotOutput("plot_arcada_vs_falha")
-          ),
-          splitLayout(
-            h3("lado"),
-            h3("lado vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_lado"),
-            plotOutput("plot_lado_vs_falha")
-          ),
-          splitLayout(
-            h3("tipo.restauracao"),
-            h3("tipo.restauracao vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_tipo.restauracao"),
-            plotOutput("plot_tipo.restauracao_vs_falha")
-          ),
-          splitLayout(
-            h3("material.restauracao"),
-            h3("material.restauracao vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_material.restauracao"),
-            plotOutput("plot_material.restauracao_vs_falha")
+            plotOutput("plot_arcada_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("classe"),
@@ -222,71 +154,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_classe"),
-            plotOutput("plot_classe_vs_falha")
-          ),
-          splitLayout(
-            h3("superficies.restauradas"),
-            h3("superficies.restauradas vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_superficies.restauradas"),
-            plotOutput("plot_superficies.restauradas_vs_falha")
-          ),
-          splitLayout(
-            h3("censored"),
-            h3("censored vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_censored"),
-            plotOutput("plot_censored_vs_falha")
-          ),
-          splitLayout(
-            h3("data.falha.1"),
-            h3("data.falha.1 vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_data.falha.1"),
-            plotOutput("plot_data.falha.1_vs_falha")
-          ),
-          splitLayout(
-            h3("data.falha.2"),
-            h3("data.falha.2 vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_data.falha.2"),
-            plotOutput("plot_data.falha.2_vs_falha")
-          ),
-          splitLayout(
-            h3("tempo.censored"),
-            h3("tempo.censored vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_tempo.censored"),
-            plotOutput("plot_tempo.censored_vs_falha")
-          ),
-          splitLayout(
-            h3("tempo.falha.sucesso"),
-            h3("tempo.falha.sucesso vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_tempo.falha.sucesso"),
-            plotOutput("plot_tempo.falha.sucesso_vs_falha")
-          ),
-          splitLayout(
-            h3("tempo.falha.falha"),
-            h3("tempo.falha.falha vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_tempo.falha.falha"),
-            plotOutput("plot_tempo.falha.falha_vs_falha")
-          ),
-          splitLayout(
-            h3("preco"),
-            h3("preco vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_preco"),
-            plotOutput("plot_preco_vs_falha")
+            plotOutput("plot_classe_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("adesivo"),
@@ -294,7 +162,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_adesivo"),
-            plotOutput("plot_adesivo_vs_falha")
+            plotOutput("plot_adesivo_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("material.preenchimento"),
@@ -302,7 +170,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_material.preenchimento"),
-            plotOutput("plot_material.preenchimento_vs_falha")
+            plotOutput("plot_material.preenchimento_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.lingual"),
@@ -310,7 +178,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.lingual"),
-            plotOutput("plot_superficie.lingual_vs_falha")
+            plotOutput("plot_superficie.lingual_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.palatal"),
@@ -318,15 +186,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.palatal"),
-            plotOutput("plot_superficie.palatal_vs_falha")
-          ),
-          splitLayout(
-            h3("superficie.lingual.palatal"),
-            h3("superficie.lingual.palatal vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_superficie.lingual.palatal"),
-            plotOutput("plot_superficie.lingual.palatal_vs_falha")
+            plotOutput("plot_superficie.palatal_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.vestibular"),
@@ -334,7 +194,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.vestibular"),
-            plotOutput("plot_superficie.vestibular_vs_falha")
+            plotOutput("plot_superficie.vestibular_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.oclusal"),
@@ -342,7 +202,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.oclusal"),
-            plotOutput("plot_superficie.oclusal_vs_falha")
+            plotOutput("plot_superficie.oclusal_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.incisal"),
@@ -350,15 +210,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.incisal"),
-            plotOutput("plot_superficie.incisal_vs_falha")
-          ),
-          splitLayout(
-            h3("superficie.oclusal.incisal"),
-            h3("superficie.oclusal.incisal vs Falha")
-          ),
-          splitLayout(
-            plotOutput("plot_superficie.oclusal.incisal"),
-            plotOutput("plot_superficie.oclusal.incisal_vs_falha")
+            plotOutput("plot_superficie.incisal_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.mesial"),
@@ -366,7 +218,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.mesial"),
-            plotOutput("plot_superficie.mesial_vs_falha")
+            plotOutput("plot_superficie.mesial_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficie.distal"),
@@ -374,7 +226,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficie.distal"),
-            plotOutput("plot_superficie.distal_vs_falha")
+            plotOutput("plot_superficie.distal_vs_falha", width = "98%")
           ),
           splitLayout(
             h3("superficies.restauradas.count"),
@@ -382,7 +234,7 @@ shinyUI(
           ),
           splitLayout(
             plotOutput("plot_superficies.restauradas.count"),
-            plotOutput("plot_superficies.restauradas.count_vs_falha")
+            plotOutput("plot_superficies.restauradas.count_vs_falha", width = "98%")
           )
        ),
        tabPanel("Algoritmos",

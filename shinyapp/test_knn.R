@@ -1,6 +1,6 @@
 library(class)
-source("prepara_dataset.r")
-source("functions.r")
+source("shinyapp/prepara_dataset.r")
+source("shinyapp/functions.r")
 
 all_results_knn = data.frame()
 
@@ -172,7 +172,7 @@ options("max.print"=9999)
 
 nrow(result)
 
-result
+result = result[order(result$pct_acerto),]
 
 result[result$test.registros_processados > 1000 & result$pct_treinamento > 0.6 & result$pct_treinamento < 0.9 & result$pct_acerto > 0.72, ]
 
@@ -183,10 +183,10 @@ summary(data$classe)
 
 testa_tudo <- function() {
   result = data.frame()
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"))$info)
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n"))$info)
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n"))$info)
-  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n"))$info)
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")))
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.n", "superficie.palatal.n", "superficie.vestibular.n", "superficie.oclusal.n", "superficie.mesial.n", "superficie.distal.n", "vitalidade.n", "classe.n")))
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "novo.restauracao.n", "numero.dente", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")))
+  result = rbind(result, testa_colunas(c("sexo.n", "idade", "tipo.invervencao.n", "motivo.n", "novo.restauracao.n", "numero.dente.n", "tipo.dente.n", "arcada.n", "lado.n", "tipo.restauracao.n", "material.restauracao.n", "superficie.lingual.palatal.n", "superficie.vestibular.n", "superficie.oclusal.incisal.n", "superficie.mesial.n", "superficie.distal.n")))
   nrow(result)
   result[order(result$pct_acerto),]
 }
@@ -227,7 +227,7 @@ testa_com_sem_normalizacao <- function(name, pct_treinamento, atributos, classe,
 testa_varios_k <- function(name, pct_treinamento, atributos, classe, metodo_na, normalizar) {
   result = data.frame()
   for (k in 10*1:20){
-    result = rbind(result, test_knn(name, k, pct_treinamento, atributos, classe, metodo_na, normalizar))
+    result = rbind(result, test_knn(name, k, pct_treinamento, atributos, classe, metodo_na, normalizar)$info)
   }
   result
 }

@@ -126,36 +126,17 @@ shinyServer(function(input, output) {
     df = as.data.frame(table(data$nascimento))
     barplot(apply.yearly(zoo(df$Freq, as.Date(df$Var1)), sum))
   })
-  output$plot_nascimento_vs_falha <- renderPlot({
-    plot(data$falha.s, data$nascimento)
-  })
 
   output$plot_data.intervencao <- renderPlot({
-    plot(data$data.intervencao)
-  })
-  output$plot_data.intervencao_vs_falha <- renderPlot({
-    plot(data$falha.s, data$data.intervencao)
-  })
-
-  output$plot_data.final <- renderPlot({
-    plot(data$data.final)
-  })
-  output$plot_data.final_vs_falha <- renderPlot({
-    plot(data$falha.s, data$data.final)
+    df = as.data.frame(table(data$data.intervencao))
+    barplot(apply.yearly(zoo(df$Freq, as.Date(df$Var1)), sum))
   })
 
   output$plot_idade <- renderPlot({
-    plot(data$idade)
+    barplot(table(as.integer(data$idade)))
   })
   output$plot_idade_vs_falha <- renderPlot({
     plot(data$falha.s, data$idade)
-  })
-
-  output$plot_tipo.invervencao <- renderPlot({
-    plot(data$tipo.invervencao)
-  })
-  output$plot_tipo.invervencao_vs_falha <- renderPlot({
-    plot(data$falha.s, data$tipo.invervencao)
   })
 
   output$plot_vitalidade <- renderPlot({
@@ -172,20 +153,6 @@ shinyServer(function(input, output) {
     plot(data$falha.s, data$novo.restauracao)
   })
 
-  output$plot_motivo <- renderPlot({
-    plot(data$motivo)
-  })
-  output$plot_motivo_vs_falha <- renderPlot({
-    plot(data$falha.s, data$motivo)
-  })
-
-  output$plot_numero.dente <- renderPlot({
-    plot(data$numero.dente)
-  })
-  output$plot_numero.dente_vs_falha <- renderPlot({
-    plot(data$falha.s, data$numero.dente)
-  })
-
   output$plot_tipo.dente <- renderPlot({
     plot(data$tipo.dente)
   })
@@ -200,94 +167,59 @@ shinyServer(function(input, output) {
     plot(data$falha.s, data$arcada)
   })
 
-  output$plot_lado <- renderPlot({
-    plot(data$lado)
-  })
-  output$plot_lado_vs_falha <- renderPlot({
-    plot(data$falha.s, data$lado)
-  })
-
-  output$plot_tipo.restauracao <- renderPlot({
-    plot(data$tipo.restauracao)
-  })
-  output$plot_tipo.restauracao_vs_falha <- renderPlot({
-    plot(data$falha.s, data$tipo.restauracao)
-  })
-
-  output$plot_material.restauracao <- renderPlot({
-    plot(data$material.restauracao)
-  })
-  output$plot_material.restauracao_vs_falha <- renderPlot({
-    plot(data$falha.s, data$material.restauracao)
-  })
 
   output$plot_classe <- renderPlot({
-    plot(data$classe)
+    dados = as.character(data$classe)
+    dados[dados == "Veneer+Ribbond"] = "Outros"
+    dados[dados == "Aumento incisal"] = "Outros"
+    dados[dados == "Coroa sobre implante"] = "Outros"
+    dados[dados == "ReconstituiÃ§Ã£o com pino"] = "Outros"
+    dados[dados == "Coroa"] = "Outros"
+    dados[dados == "Coroa pura"] = "Outros"
+    dados[dados == "Faceta"] = "Outros"
+    dados[dados == "I+V"] = "Outros"
+    dados[dados == "III+Veneer"] = "Outros"
+    dados[dados == "Onlay"] = "Outros"
+    dados[dados == "V+I"] = "Outros"
+    dados[dados == "Overlay"] = "Outros"
+    dados[dados == "IV"] = "Outros"
+    plot(as.factor(dados))
   })
   output$plot_classe_vs_falha <- renderPlot({
-    plot(data$falha.s, data$classe)
-  })
-
-  output$plot_superficies.restauradas <- renderPlot({
-    plot(data$superficies.restauradas)
-  })
-  output$plot_superficies.restauradas_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficies.restauradas)
-  })
-  output$plot_censored <- renderPlot({
-    plot(data$censored)
-  })
-  output$plot_censored_vs_falha <- renderPlot({
-    plot(data$falha.s, data$censored)
-  })
-
-  output$plot_data.falha.1 <- renderPlot({
-    plot(data$data.falha.1)
-  })
-  output$plot_data.falha.1_vs_falha <- renderPlot({
-    plot(data$falha.s, data$data.falha.1)
-  })
-
-  output$plot_data.falha.2 <- renderPlot({
-    plot(data$data.falha.2)
-  })
-  output$plot_data.falha.2_vs_falha <- renderPlot({
-    plot(data$falha.s, data$data.falha.2)
-  })
-
-  output$plot_tempo.censored <- renderPlot({
-    plot(data$tempo.censored)
-  })
-  output$plot_tempo.censored_vs_falha <- renderPlot({
-    plot(data$falha.s, data$tempo.censored)
-  })
-
-  output$plot_tempo.falha.sucesso <- renderPlot({
-    plot(data$tempo.falha.sucesso)
-  })
-  output$plot_tempo.falha.sucesso_vs_falha <- renderPlot({
-    plot(data$falha.s, data$tempo.falha.sucesso)
-  })
-
-  output$plot_tempo.falha.falha <- renderPlot({
-    plot(data$tempo.falha.falha)
-  })
-  output$plot_tempo.falha.falha_vs_falha <- renderPlot({
-    plot(data$falha.s, data$tempo.falha.falha)
-  })
-
-  output$plot_preco <- renderPlot({
-    plot(data$preco)
-  })
-  output$plot_preco_vs_falha <- renderPlot({
-    plot(data$falha.s, data$preco)
+    dados = as.character(data$classe)
+    dados[dados == "Veneer+Ribbond"] = "Outros"
+    dados[dados == "Aumento incisal"] = "Outros"
+    dados[dados == "Coroa sobre implante"] = "Outros"
+    dados[dados == "ReconstituiÃ§Ã£o com pino"] = "Outros"
+    dados[dados == "Coroa"] = "Outros"
+    dados[dados == "Coroa pura"] = "Outros"
+    dados[dados == "Faceta"] = "Outros"
+    dados[dados == "I+V"] = "Outros"
+    dados[dados == "III+Veneer"] = "Outros"
+    dados[dados == "Onlay"] = "Outros"
+    dados[dados == "V+I"] = "Outros"
+    dados[dados == "Overlay"] = "Outros"
+    dados[dados == "IV"] = "Outros"
+    plot(data$falha.s, as.factor(dados))
   })
 
   output$plot_adesivo <- renderPlot({
-    plot(data$adesivo)
+    dados = as.character(data$adesivo)
+    dados[dados == "ALLBONDII"] = "Outros"
+    dados[dados == "AUTOCOND 3M"] = "Outros"
+    dados[dados == "CLEARFIL SE"] = "Outros"
+    dados[dados == "SILANO"] = "Outros"
+    dados[dados == "CLEARFIL"] = "Outros"
+    plot(as.factor(dados))
   })
   output$plot_adesivo_vs_falha <- renderPlot({
-    plot(data$falha.s, data$adesivo)
+    dados = as.character(data$adesivo)
+    dados[dados == "ALLBONDII"] = "Outros"
+    dados[dados == "AUTOCOND 3M"] = "Outros"
+    dados[dados == "CLEARFIL SE"] = "Outros"
+    dados[dados == "SILANO"] = "Outros"
+    dados[dados == "CLEARFIL"] = "Outros"
+    plot(data$falha.s, as.factor(dados))
   })
 
   output$plot_material.preenchimento <- renderPlot({
@@ -298,70 +230,56 @@ shinyServer(function(input, output) {
   })
 
   output$plot_superficie.lingual <- renderPlot({
-    plot(data$superficie.lingual)
+    barplot(table(data$superficie.lingual))
   })
   output$plot_superficie.lingual_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.lingual)
+    plot(table(data$falha.s, data$superficie.lingual))
   })
 
   output$plot_superficie.palatal <- renderPlot({
-    plot(data$superficie.palatal)
+    barplot(table(data$superficie.palatal))
   })
   output$plot_superficie.palatal_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.palatal)
-  })
-
-  output$plot_superficie.lingual.palatal <- renderPlot({
-    plot(data$superficie.lingual.palatal)
-  })
-  output$plot_superficie.lingual.palatal_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.lingual.palatal)
+    plot(table(data$falha.s, data$superficie.palatal))
   })
 
   output$plot_superficie.vestibular <- renderPlot({
-    plot(data$superficie.vestibular)
+    barplot(table(data$superficie.vestibular))
   })
   output$plot_superficie.vestibular_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.vestibular)
+    plot(table(data$falha.s, data$superficie.vestibular))
   })
 
   output$plot_superficie.oclusal <- renderPlot({
-    plot(data$superficie.oclusal)
+    barplot(table(data$superficie.oclusal))
   })
   output$plot_superficie.oclusal_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.oclusal)
+    plot(table(data$falha.s, data$superficie.oclusal))
   })
 
   output$plot_superficie.incisal <- renderPlot({
-    plot(data$superficie.incisal)
+    barplot(table(data$superficie.incisal))
   })
   output$plot_superficie.incisal_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.incisal)
-  })
-
-  output$plot_superficie.oclusal.incisal <- renderPlot({
-    plot(data$superficie.oclusal.incisal)
-  })
-  output$plot_superficie.oclusal.incisal_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.oclusal.incisal)
+    plot(table(data$falha.s, data$superficie.incisal))
   })
 
   output$plot_superficie.mesial <- renderPlot({
-    plot(data$superficie.mesial)
+    barplot(table(data$superficie.mesial))
   })
   output$plot_superficie.mesial_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.mesial)
+    plot(table(data$falha.s, data$superficie.mesial))
   })
 
   output$plot_superficie.distal <- renderPlot({
-    plot(data$superficie.distal)
+    barplot(table(data$superficie.distal))
   })
   output$plot_superficie.distal_vs_falha <- renderPlot({
-    plot(data$falha.s, data$superficie.distal)
+    plot(table(data$falha.s, data$superficie.distal))
   })
 
   output$plot_superficies.restauradas.count <- renderPlot({
-    barplot(data$superficies.restauradas.count)
+    barplot(table(data$superficies.restauradas.count))
   })
   output$plot_superficies.restauradas.count_vs_falha <- renderPlot({
     plot(data$falha.s, data$superficies.restauradas.count)
